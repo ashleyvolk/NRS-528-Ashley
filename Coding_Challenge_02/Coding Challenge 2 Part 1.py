@@ -66,6 +66,7 @@
 
 # Hint:
 age = input("What is your age? ")
-value = input()
-retirement = 65 - value
+
+retirement = 65 - int(age)
 print ("Your age is " + str(age))
+print ("Your retirement is in " + str(retirement) + " years")
