@@ -1,0 +1,6 @@
+import arcpy
+
+in_features = r"E:\NRS_528_Ashley\Coding_Challenge_4\Municipalities__1989_.shp"
+out_feature_class = r"E:\NRS_528_Ashley\Coding_Challenge_4\Washington_County.shp"
+where_clause = COUNTY = 'WASHINGTON'
+arcpy.analysis.Select(in_features, out_feature_class, {where_clause})
