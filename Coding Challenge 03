@@ -34,4 +34,11 @@
 # os.rmdir("draft_code/pending")
 # os.rmdir("draft_code")
 
+import sys
+print("My argument: " + str(sys.argv[1]))
+print("My argument 2: " + str(sys.argv[2]))
+print("My argument 3: " + str(sys.argv[3]))
+
+Bat file - "C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe" Step_2.py IamArgument Arg2 Arg3
+pause
 
