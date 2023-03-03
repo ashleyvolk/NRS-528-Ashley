@@ -1,0 +1,46 @@
+import csv
+
+with open('Species_Data.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+
+Species_Data = []
+for row in csv_reader: #This row is giving me an I/O error
+    if row[0] not in Species_Data:
+        Species_Data.append(row[0])
+
+# Set your workspace to the directory where you are storing your files
+# arcpy.env.workspace = r"C:\NRS_528\Assignment\CodingChallenge05"
+#
+# in_Table = r"Species_Data.csv"
+# x_coords = "Long"
+# y_coords = "Lat"
+# z_coords = ""
+# out_Layer = "Species"
+# saved_Layer = r"Species_Output.shp"
+#
+# # Set the spatial reference
+# spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
+#
+# lyr = arcpy.MakeXYEventLayer_management(in_Table, x_coords, y_coords, out_Layer, spRef, z_coords)
+#
+# ##### 2. Count the number of records and check output exists in the file.
+#
+# # Print the total rows
+# print(arcpy.GetCount_management(out_Layer))
+#
+# # Save to a layer file
+# arcpy.CopyFeatures_management(lyr, saved_Layer)
+#
+# if arcpy.Exists(saved_Layer):
+#     print("Created file successfully!")
+
+##### 3. Check the correct coordinate system has been applied (Hint: see last week!)
+
+# desc = arcpy.Describe(saved_Layer)
+# print(desc.spatialReference.name)
+#
+# arcpy.env.workspace = r"C:\NRS_528\Assignment\CodingChallenge05"
+# in_features = r"C:\NRS_528\Assignment\Municipalities_(1997).shp"
+# out_feature_class = r"C:\NRS_528\Assignment\Washington_towns.shp"
+# where_clause = COUNTY = 'WASHINGTON'
+# arcpy.analysis.Select(in_features, out_feature_class, where_clause)
