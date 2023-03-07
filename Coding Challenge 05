@@ -16,7 +16,7 @@ with open('species_list.csv') as csv_file:
 
 print(species_list)
 
-# Create two csv files with the two different species 
+# Create two csv files with the two different species
 for species in species_list:
     print(species)
     file_name = species + ".csv"
@@ -47,49 +47,52 @@ for species in species_list:
 
 # Set the spatial reference
     spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
-
     lyr = arcpy.MakeXYEventLayer_management(in_Table, x_coords, y_coords, out_Layer, spRef, z_coords)
-    
-# Count the number of each file
-    
-# Print the total rows
+
+# Count the number of each file and print it
     print(arcpy.GetCount_management(out_Layer))
 
 # Save to a layer file
     arcpy.CopyFeatures_management(lyr, saved_Layer)
-
     if arcpy.Exists(saved_Layer):
         print("Created file successfully!")
 
-   
-# Describe the extent of the files 
+
+# Describe the extent of the files
     desc = arcpy.Describe(saved_Layer)
     XMin = desc.extent.XMin
     XMax = desc.extent.XMax
     YMin = desc.extent.YMin
     YMax = desc.extent.YMax
-
+    
+# Set the spatial reference of the data (WGS 1984)
     arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(4326)
+    
 # Create a fishnet shp file for the two different files
-    outFeatureClass = species + "fishnet.shp"  # Name of output fishnet
+    outFeatureClass = species + "fishnet.shp"  
 
 # Set the origin of the fishnet
 # Create a variable to change the cell size so it is dynamic
     if XMax < 0:
         XMax_Val = XMax * -1
+    else:
+        XMax_Val = XMax
     if XMin < 0:
         XMin_Val = XMin * -1
+    else:
+        XMin_Val = XMin
 
-    originCoordinate = str(XMin) + " " + str(YMin)  # Left bottom of our point data
-    yAxisCoordinate = str(XMin) + " " + str(YMin + 1)  # This sets the orientation on the y-axis, so we head north
-    cellSizeWidth = XMax + XMin/30
-    cellSizeHeight = XMax + XMin/30
-    numRows = ""  # Leave blank, as we have set cellSize
-    numColumns = "" # Leave blank, as we have set cellSize
-    oppositeCorner = str(XMax) + " " + str(YMax)  # i.e. max x and max y coordinate
+    originCoordinate = str(XMin) + " " + str(YMin) 
+    yAxisCoordinate = str(XMin) + " " + str(YMin + 1) 
+    cellSizeWidth = (XMax_Val + XMin_Val)/50
+    print(cellSizeWidth)
+    cellSizeHeight = (XMax_Val + XMin_Val)/50
+    numRows = ""  
+    numColumns = "" 
+    oppositeCorner = str(XMax) + " " + str(YMax) 
     labels = "NO_LABELS"
-    templateExtent = "#"  # No need to use, as we have set yAxisCoordinate and oppositeCorner
-    geometryType = "POLYGON"  # Create a polygon, could be POLYLINE
+    templateExtent = "#"  
+    geometryType = "POLYGON"  
 
     arcpy.CreateFishnet_management(outFeatureClass, originCoordinate, yAxisCoordinate,
                                    cellSizeWidth, cellSizeHeight, numRows, numColumns,
@@ -120,3 +123,4 @@ for species in species_list:
         print("Deleting intermediate files")
         arcpy.Delete_management(target_features)
         arcpy.Delete_management(join_features)
+
