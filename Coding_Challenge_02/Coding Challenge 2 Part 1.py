@@ -64,9 +64,28 @@
 # Ask the user for an input of their current age,
 # and tell them how many years until they reach retirement (65 years old).
 
-# Hint:
-age = input("What is your age? ")
+# # Hint:
+# age = input("What is your age? ")
+# retirement = 65 - int(age)
+# print ("Your age is " + str(age))
+# print ("Your retirement year is in " + str(retirement) + "year")
 
-retirement = 65 - int(age)
-print ("Your age is " + str(age))
-print ("Your retirement is in " + str(retirement) + " years")
+
+
+# 5. User input 2
+# Using the following dictionary (or a similar one you found on the internet), ask the user for a word,
+#     and compute the Scrabble word score for that word (Scrabble is a word game, where players make words from letters,
+#     each letter is worth a point value), steal this code from the internet, format it and make it work:
+
+# score = {"a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2,
+#          "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3,
+#          "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1,
+#          "r": 1, "u": 1, "t": 1, "w": 4, "v": 4, "y": 4,
+#          "x": 8, "z": 10}
+# def word_score(word):
+#     total = 0
+#     for i in word:
+#         total = total+score[i.lower()]
+#     return total
+# 
+# print(word_score("green"))
