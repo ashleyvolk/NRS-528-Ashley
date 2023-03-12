@@ -1,5 +1,5 @@
 # Coding Challenge 5:
-# Link to the data is located on GitHub: https://github.com/ashleyvolk/NRS-528-Ashley/blob/main/species_list.csv
+# Link to the data is located on GitHub: https://github.com/ashleyvolk/NRS-528-Ashley/tree/main/Data/Coding%20Challenge%2005
 
 # Import the two packages to help analyze the data
 import csv
