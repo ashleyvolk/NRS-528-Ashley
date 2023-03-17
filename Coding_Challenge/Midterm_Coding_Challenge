@@ -5,14 +5,12 @@ import os
 import glob
 
 # Create the workspace
-# Import the csv file and create a new list specific to the csv file
-# In this case I am printing out a list of the town values from the csv
 arcpy.env.workspace = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
 
-in_features = r"Municipalities__1989_.shp"
+in_features = "Municipalities__1989_.shp"
 
 # Add a name from the output created by the model
-out_feature_class = r"Westerly.shp"
+out_feature_class = "Westerly.shp"
 
 # For the select tool you have to add in another parameter to select the data
 # For this attempt I chose to select from the towns layer areas that were equal to Washington county
@@ -54,11 +52,11 @@ for hydrants in location_list:
                 file.write("\n")
 
     in_Table = hydrants + ".csv"
-    x_coords = "X"
-    y_coords = "Y"
+    x_coords = "x-Coords"
+    y_coords = "y-Coords"
     z_coords = ""
     out_Layer = hydrants
-    saved_Layer = hydrants + "output.shp"
+    saved_Layer = "hydrants_output.shp"
 
 # Set the spatial reference in this case the spatial reference is WGS 1984
     spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
