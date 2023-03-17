@@ -2,6 +2,7 @@
 import arcpy
 import csv
 import os
+import glob
 
 # Create the workspace
 # Import the csv file and create a new list specific to the csv file
@@ -71,3 +72,15 @@ for hydrants in location_list:
     if arcpy.Exists(saved_Layer):
 
         print("Created file successfully!")
+
+data_file = "E-911_Fire_Hydrants.csv"
+input_directory = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
+
+if not os.path.exists(os.path.join(input_directory, "output_files")):
+    os.mkdir(os.path.join(input_directory, "output_files"))
+if not os.path.exists(os.path.join(input_directory, "temporary_files")):
+    os.mkdir(os.path.join(input_directory, "temporary_files"))
+
+os.chdir(os.path.join(input_directory, "temporary_files"))# same as env.workspace
+arcpy.env.workspace = os.path.join(input_directory, "output_files")
+location_list = glob.glob("*.csv") # Find all CSV files
