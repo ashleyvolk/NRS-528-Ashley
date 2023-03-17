@@ -7,34 +7,19 @@ import os
 # Import the csv file and create a new list specific to the csv file
 # In this case I am printing out a list of the town values from the csv
 arcpy.env.workspace = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
-arcpy.env.overwriteOutput = True
-with open('Municipalities_(1997).csv') as csv_file:
-    csv_reader = csv.reader(csv_file, delimiter=',')
-    header = next(csv_reader)
-    towns_list = []
-    for row in csv_reader:
-        if row[1] not in towns_list:
-            towns_list.append(row[1])
 
-print(towns_list)
+in_features = r"Municipalities__1989_.shp"
 
-for towns in towns_list:
-    print(towns)
-    file_name = towns + ".csv"
-    print(towns + ".csv")
-    file = open(file_name, "w")
-    file.write(",".join(header))
-    file.write("\n")
+# Add a name from the output created by the model
+out_feature_class = r"Westerly.shp"
 
-    with open('Municipalities_(1997).csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        next(csv_reader)
-        towns_list = []
-        for row in csv_reader:
-            if towns == row[1]:
-                print(towns)
-                file.write(",".join(row))
-                file.write("\n")
+# For the select tool you have to add in another parameter to select the data
+# For this attempt I chose to select from the towns layer areas that were equal to Washington county
+where_clause = "COUNTY = 'WESTERLY'"
+
+# This is the select tool that will allow the code to run
+arcpy.analysis.Select(in_features, out_feature_class, where_clause)
+
 
 # This is where I imported the fire hydrants found in the csv file and
 # created the list of the locations where they are found
