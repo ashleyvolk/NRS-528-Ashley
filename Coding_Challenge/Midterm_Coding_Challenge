@@ -1,0 +1,88 @@
+# Import packages for data analysis
+import arcpy
+import csv
+import os
+
+# Create the workspace
+# Import the csv file and create a new list specific to the csv file
+# In this case I am printing out a list of the town values from the csv
+arcpy.env.workspace = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
+arcpy.env.overwriteOutput = True
+with open('Municipalities_(1997).csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    header = next(csv_reader)
+    towns_list = []
+    for row in csv_reader:
+        if row[1] not in towns_list:
+            towns_list.append(row[1])
+
+print(towns_list)
+
+for towns in towns_list:
+    print(towns)
+    file_name = towns + ".csv"
+    print(towns + ".csv")
+    file = open(file_name, "w")
+    file.write(",".join(header))
+    file.write("\n")
+
+    with open('Municipalities_(1997).csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        next(csv_reader)
+        towns_list = []
+        for row in csv_reader:
+            if towns == row[1]:
+                print(towns)
+                file.write(",".join(row))
+                file.write("\n")
+
+# This is where I imported the fire hydrants found in the csv file and
+# created the list of the locations where they are found
+arcpy.env.overwriteOutput = True
+with open('E-911_Fire_Hydrants.csv') as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    header = next(csv_reader)
+    location_list = []
+    for row in csv_reader:
+        if row[20] not in location_list:
+            location_list.append(row[20])
+
+print(location_list)
+
+for hydrants in location_list:
+    print(hydrants)
+    file_name = hydrants + ".csv"
+    print(hydrants + ".csv")
+    file = open(file_name, "w")
+    file.write(",".join(header))
+    file.write("\n")
+
+    with open('E-911_Fire_Hydrants.csv') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        next(csv_reader)
+        location_list = []
+        for row in csv_reader:
+            if hydrants == row[20]:
+                print(hydrants)
+                file.write(",".join(row))
+                file.write("\n")
+
+    in_Table = hydrants + ".csv"
+    x_coords = "X"
+    y_coords = "Y"
+    z_coords = ""
+    out_Layer = hydrants
+    saved_Layer = hydrants + "output.shp"
+
+# Set the spatial reference in this case the spatial reference is WGS 1984
+    spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
+    lyr = arcpy.MakeXYEventLayer_management(in_Table, x_coords, y_coords, out_Layer, spRef, z_coords)
+
+# Count the number of each file and print it
+    print(arcpy.GetCount_management(out_Layer))
+
+# Save to a layer file
+    arcpy.CopyFeatures_management(lyr, saved_Layer)
+    if arcpy.Exists(saved_Layer):
+
+        print("Created file successfully!")
