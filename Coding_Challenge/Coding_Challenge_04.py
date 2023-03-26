@@ -1,4 +1,4 @@
-# Coding Challenge 4
+# Coding Challenge 4.py
 # For this coding challenge, I want you to find a particular tool that you like in arcpy.
 # It could be a tool that you have used in GIS before or something new.
 # Try browsing the full tool list to get some insight here (click Tool Reference on the menu list to the left).
