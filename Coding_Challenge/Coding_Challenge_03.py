@@ -5,15 +5,15 @@
 # 1. Simple directory tree
 # Replicate this tree of directories and subdirectories:
 
-├── draft_code
-|   ├── pending
-|   └── complete
-├── includes
-├── layouts
-|   ├── default
-|   └── post
-|       └── posted
-└── site
+# ├── draft_code
+# |   ├── pending
+# |   └── complete
+# ├── includes
+# ├── layouts
+# |   ├── default
+# |   └── post
+# |       └── posted
+# └── site
 
 # Using os.system or os.mkdirs replicate this simple directory tree.
 # Delete the directory tree without deleting your entire hard drive.
