@@ -5,7 +5,7 @@ import os
 import glob
 
 # Create the workspace
-arcpy.env.workspace = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
+arcpy.env.workspace = r"C:\Data\Students_2023\Volk\Data\Midterm_Coding_Challenge"
 
 in_features = "Municipalities__1989_.shp"
 
