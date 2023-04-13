@@ -8,13 +8,18 @@
 # Print or file generated output should be produced.
 
 import sys
-"C:\Program Files\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe" Part02.py IamArgument
-def main(arg):
-    print("My argument: " + str(arg))
-main(sys.argv[1])
-# countdown = 100
-#
-# while countdown > 0:
-#     print ('CountDown = ', countdown)
-#     countdown = countdown - 5
 
+# Get command-line arguments
+args = sys.argv[1:]
+
+# Convert arguments to numbers
+numbers = [int(arg) for arg in args]
+
+# Sort the numbers in ascending order
+sorted_numbers = sorted(numbers)
+
+# Print the sorted numbers
+print("Sorted numbers:", sorted_numbers)
+
+# C:\Users\Ashley>C:\Users\Ashley\AppData\Local\Programs\ArcGIS\Pro\bin\Python\envs\arcgispro-py3\python.exe C:\NRS_528\Assignment\CodingChallege03\Part02.py
+# Sorted numbers: []
