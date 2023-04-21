@@ -24,7 +24,7 @@ with arcpy.da.SearchCursor(input_shp, fields, expression) as cursor:
 print("Printing Photos")
 print(photos)
 
-expression = arcpy.AddFieldDelimiters(input_shp, "photo") + " = ' '"  # Cleaner and easier to code
+expression = arcpy.AddFieldDelimiters(input_shp, "photo") + " = ''"  # Cleaner and easier to code
 no_photos = 0
 with arcpy.da.SearchCursor(input_shp, fields, expression) as cursor:
     for row in cursor:
@@ -32,7 +32,7 @@ with arcpy.da.SearchCursor(input_shp, fields, expression) as cursor:
 print("Printing no Photos")
 print(no_photos)
 
-expression = arcpy.AddFieldDelimiters(input_shp, "Species") + " = ' '"  # Cleaner and easier to code
+expression = arcpy.AddFieldDelimiters(input_shp, "Species") + " = ''"  # Cleaner and easier to code
 species = 0
 with arcpy.da.SearchCursor(input_shp, fields, expression) as cursor:
     for row in cursor:
@@ -80,4 +80,4 @@ arcpy.CreateFeatureclass_management(out_path, out_name, geometry_type, template,
                                     has_m, has_z, spatial_ref)
 
 arcpy.analysis.Select("RI_Forest_Health_Works_Project%3A_Points_All_Invasives.shp",
-                      "no_Photos.shp", '"photo" = ')
+                      "no_Photos.shp", '"photo" =')
