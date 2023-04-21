@@ -17,19 +17,29 @@
 
 import arcpy
 from arcpy.sa import *
-arcpy.env.overwrite = True
+import os
+
+arcpy.env.overwriteOutput = True ## AD- Should be overwriteOutput
 
 arcpy.env.workspace = r"C:\NRS_528\Assignment\CodingChallenge10"
 
-list_data = ["201502", "201504", "201505", "201507", "201510", "201511"]
+arcpy.env.workspace = r"C:\Data\Landsat_data_lfs" ## AD
+
+
+list_data = ["201502", "201504", "201505", "201507", "201510", "201511"] ## AD - I would search the directory for these subdirectories computationally.
 print(list_data)
 
-for raster in list_data:
+for raster in list_data: ## AD - I would not use the word raster here, as it could confuse.
+
+    arcpy.env.workspace = os.path.join(r"C:\Data\Landsat_data_lfs", raster)  ## AD - Need to set location for ListRasters to search
+
     B4 = arcpy.ListRasters("*B4*", "TIF")[0]
     B5 = arcpy.ListRasters("*B5*", "TIF")[0]
 
     outRaster = (Raster(B5) - Raster(B4)) / (Raster(B5) + Raster(B4))
-    outRaster.save("NVDI_{raster}.tif")
+    arcpy.env.workspace = os.path.join(r"C:\Data\Landsat_data_lfs") # AD - switch back to other dir to save files
+    #outRaster.save("NVDI_{raster}.tif") ## AD - This will not save the name that you think it will save.
+    outRaster.save("NVDI_" + raster + ".tif")
 
 
 
