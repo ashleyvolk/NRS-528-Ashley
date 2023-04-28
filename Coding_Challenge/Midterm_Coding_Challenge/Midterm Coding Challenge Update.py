@@ -34,19 +34,21 @@ if not os.path.exists(os.path.join(input_directory, "output_files")):
     os.mkdir(os.path.join(input_directory, "output_files"))
 
 
-os.chdir(os.path.join(input_directory, "temporary_files"))# same as env.workspace
+os.chdir(os.path.join(input_directory, "temporary_files"))
 arcpy.env.workspace = os.path.join(input_directory, "output_files")
 location_list = glob.glob("*.csv") # Find all CSV files
+
+
 # Create the workspace
 arcpy.env.workspace = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
 
 in_features = "Municipalities__1989_.shp"
 
 # Add a name from the output created by the model
-out_feature_class = os.path.join(input_directory, "output_files", "Westerly.shp")
+out_feature_class = os.path.join(input_directory, "temporary_files", "Westerly.shp")
 
 # For the select tool you have to add in another parameter to select the data
-# For this attempt I chose to select from the towns layer areas that were equal to Washington county
+# For this attempt I chose to select from the towns layer areas that were equal the town Westerly
 where_clause = "NAME = 'WESTERLY'"
 
 # This is the select tool that will allow the code to run
@@ -55,52 +57,51 @@ arcpy.analysis.Select(in_features, out_feature_class, where_clause)
 print("Westerly Selected")
 
 
-
-
+# Set the input directory and data files for the second step of data analysis
 input_directory = r"C:\NRS_528\Assignment\MidtermCodingChallenge"
-data_file = "E-911_Fire_Hydrants (1).csv"
-
-os.chdir(os.path.join(input_directory, "temporary_files"))# same as env.workspace
-arcpy.env.workspace = os.path.join(input_directory, "output_files")
-location_list = glob.glob("*.csv") # Find all CSV files
+data_file = "E-911_Fire_Hydrants_3.csv"
 
 # This is where I imported the fire hydrants found in the csv file and
 # created the list of the locations where they are found
-with open('E-911_Fire_Hydrants (1).csv') as csv_file:
+with open(os.path.join(input_directory, 'E-911_Fire_Hydrants_3.csv')) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     header = next(csv_reader)
     location_list = []
     for row in csv_reader:
-        if row[20] not in location_list:
-            location_list.append(row[20])
+        if row[2] not in location_list:
+            location_list.append(row[2])
 
 print(location_list)
+print(header)
 
+# Write the files and fill in the information for each hydrant file in the specific location
 for hydrants in location_list:
-    file_name = hydrants + ".csv"
+    file_name = os.path.join(input_directory, "temporary_files", hydrants + ".csv")
     print(hydrants + ".csv")
     file = open(file_name, "w")
     file.write(",".join(header))
     file.write("\n")
 
-    with open('E-911_Fire_Hydrants (1).csv') as csv_file:
+    with open(os.path.join(input_directory, 'E-911_Fire_Hydrants_3.csv')) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader)
-        location_list = []
         for row in csv_reader:
-            if hydrants == row[20]:
-                print(hydrants)
+            if hydrants == row[2]:
                 file.write(",".join(row))
                 file.write("\n")
+    file.close()
+    print("code is working")
 
     arcpy.env.workspace = os.path.join(input_directory, "temporary_files")
 
-    in_Table = hydrants + ".csv"
-    x_coords = "x-Coords"
-    y_coords = "y-Coords"
+# Create the shapefile from the .csv file for the output data
+    in_Table = os.path.join(input_directory, "temporary_files", hydrants + ".csv")
+    print(in_Table)
+    x_coords = "X"
+    y_coords = "Y"
     z_coords = ""
-    out_Layer = hydrants
-    saved_Layer = "hydrants_output.shp"
+    out_Layer = "hydrants"
+    saved_Layer = os.path.join(input_directory, "output_files", "hydrants_output.shp")
 
 # Set the spatial reference in this case the spatial reference is WGS 1984
     spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
@@ -115,9 +116,7 @@ for hydrants in location_list:
 
         print("Created file successfully!")
 
-if keep_temp_files == False:
-    print("Deleting intermediate files")
-    arcpy.Delete_management(os.path.join(input_directory, "temporary_files"))
+
 
 
 
