@@ -7,4 +7,4 @@
 * Following this you use the buffer tool and set a distance around the lakes and ponds layer to set a buffer distance around these areas. 
   * The buffer tool helps to show the areas surrounding the lakes and ponds which could cause harm to these areas such as gas stations, large freeways, parking lots, etc.
 
-#### The example data is zipped in this folder for testing.
+#### The example data is zipped in this Final Coding Challenge folder for testing.
