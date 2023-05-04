@@ -1,12 +1,11 @@
 # NRS-528-Ashley
-# Coding-Challenge 01
-## Hi I'm Ashley!
-![Ashley 2 1](https://user-images.githubusercontent.com/123770807/216112998-4448fef1-90a9-4e7f-9595-a40a86adc444.jpeg)
-### I am currently a senior at URI studying Environmental Science and Management.
-* I am very interested in GIS and want to explore python to further my skills.
-* I have had two internships over the past two summers in which I worked with GIS.
-  * The first summer I worked with GIS to create a model in which we could create orthomosaics over water to study water bird distribution.
-  * The second summer I worked with GIS to understand the changes in aquifer volume from the years 2000 to 2018.
+# Final Toolbox Coding Challenge
+### This toolbox contains the three tools, the select tool, the clip tool, and the buffer tool.
+* The select tool is used to select for an area of Rhode Island in which you want to make the study area (can be either a town or county in Rhode Island)
+* Then you use the clip tool to clip the lakes and ponds layer to the study area you created with the select tool.
+* After this you use the select tool again and select for lakes and ponds that are larger than a specified amount that the user decides on. 
+* Following this you use the buffer tool and set a distance around the lakes and ponds layer to set a buffer distance around these areas. 
+  * The buffer tool helps to show the areas surrounding the lakes and ponds which could cause harm to these areas such as gas stations, large freeways, parking lots, etc.
 ### *Things I Enjoy:*
 * Cooking
 * Baking
